@@ -3,10 +3,10 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
-  host: ec2-54-83-62-190.compute-1.amazonaws.com
-  username: jtxyygnanskwjo
-  password: ae676ae4d25df65effdf91c648d3d2935a7e1d21212a92c2f97224ab0e37cf93
-  database: dffl6c2idbc124
+  host: ec2-174-129-28-38.compute-1.amazonaws.com
+  database: d5k74or7apsrd4
+  username: pmrtadqevejahi
+  password: df9b9a3dbb5f04e48614f79182420a43f1735879f1aecc209d13370ba7119045
   port: 5432
   
 development:
