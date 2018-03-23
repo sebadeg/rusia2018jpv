@@ -1,0 +1,2 @@
+class Apuestum < ApplicationRecord
+end

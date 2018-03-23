@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323172740) do
+ActiveRecord::Schema.define(version: 20180323192952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,4 +46,46 @@ ActiveRecord::Schema.define(version: 20180323172740) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "apuesta", force: :cascade do |t|
+    t.integer  "admin_user_id"
+    t.integer  "partido_id"
+    t.integer  "local"
+    t.integer  "visita"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["admin_user_id"], name: "index_apuesta_on_admin_user_id", using: :btree
+    t.index ["partido_id"], name: "index_apuesta_on_partido_id", using: :btree
+  end
+
+  create_table "equipos", force: :cascade do |t|
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "partidos", force: :cascade do |t|
+    t.integer  "fase"
+    t.date     "fecha"
+    t.integer  "local_id"
+    t.integer  "visita_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["local_id"], name: "index_partidos_on_local_id", using: :btree
+    t.index ["visita_id"], name: "index_partidos_on_visita_id", using: :btree
+  end
+
+  create_table "resultados", force: :cascade do |t|
+    t.integer  "partido_id"
+    t.integer  "local"
+    t.integer  "visita"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["partido_id"], name: "index_resultados_on_partido_id", using: :btree
+  end
+
+  add_foreign_key "apuesta", "admin_users"
+  add_foreign_key "apuesta", "partidos"
+  add_foreign_key "partidos", "equipos", column: "local_id"
+  add_foreign_key "partidos", "equipos", column: "visita_id"
+  add_foreign_key "resultados", "partidos"
 end
